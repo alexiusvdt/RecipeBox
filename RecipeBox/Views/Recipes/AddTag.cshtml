@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-@model ToDoList.Models.Item
+@model Recipebox.Models.Recipe
 
 <h2>Add a tag</h2>
 
@@ -10,7 +10,7 @@
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(model => model.ItemId)
+    @Html.HiddenFor(model => model.RecipeId)
 
     @Html.Label("Select tag")
     @Html.DropDownList("TagId")

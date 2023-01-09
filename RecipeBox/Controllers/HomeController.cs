@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
-using ToDoList.Models;
+using RecipeBox.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ToDoList.Controllers
+namespace RecipeBox.Controllers
 {
     public class HomeController : Controller
     {
-      private readonly ToDoListContext _db;
+      private readonly RecipeBoxContext _db;
 
-      public HomeController(ToDoListContext db)
+      public HomeController(RecipeBoxContext db)
       {
         _db = db;
       }
@@ -17,11 +17,9 @@ namespace ToDoList.Controllers
       [HttpGet("/")]
       public ActionResult Index()
       {
-        Category[] cats = _db.Categories.ToArray();
-        Item[] items = _db.Items.ToArray();
+        Recipe[] recipes = _db.Recipes.ToArray();
         Dictionary<string,object[]> model = new Dictionary<string, object[]>();
-        model.Add("categories", cats);
-        model.Add("items", items);
+        model.Add("recipes", recipes);
         return View(model);
       }
     }

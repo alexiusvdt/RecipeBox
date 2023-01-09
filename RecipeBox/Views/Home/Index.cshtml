@@ -2,38 +2,25 @@
   Layout = "_Layout";
 }
 
-@using ToDoList.Models;
+@using RecipeBox.Models;
 
 <h1>Welcome to the To Do List!</h1>
 
 <hr>
 
-<h4>Categories</h4>
-@if (Model["categories"].Length == 0)
-{
-  <p>No categories have been added yet!</p>
-} 
-<ul>
-  @foreach (Category cat in Model["categories"])
-  {
-    <li>@Html.ActionLink(@cat.Name, "Details", "Categories", new { id = @cat.CategoryId})</li>
-  }
-</ul>
-
 <h4>Items</h4>
-@if (Model["items"].Length == 0)
+@if (Model["recipes"].Length == 0)
 {
   <p>No items have been added yet!</p>
 } 
 <ul>
-  @foreach (Item item in Model["items"])
+  @foreach (Recipe recipe in Model["recipes"])
   {
-    <li>@Html.ActionLink(@item.Description, "Details", "Items", new { id = @item.ItemId})</li>
+    <li>@Html.ActionLink(@item.Description, "Details", "Items", new { id = @item.RecipeId})</li>
   }
 </ul>
 
 <hr>
 
-<p>@Html.ActionLink("Manage items", "Index", "Items")</p> 
-<p>@Html.ActionLink("Manage categories", "Index", "Categories")</p>
+<p>@Html.ActionLink("Manage recipes", "Index", "Items")</p> 
 <p>@Html.ActionLink("Manage tags", "Index", "Tags")</p>

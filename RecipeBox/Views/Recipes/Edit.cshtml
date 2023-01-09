@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-@model ToDoList.Models.Item
+@model Recipebox.Models.Item
 
 <h2>Edit</h2>
 
@@ -10,13 +10,15 @@
 
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.ItemId)
+  @Html.HiddenFor(model => model.RecipeId)
 
   @Html.LabelFor(model => model.Description)
   @Html.EditorFor(model => model.Description)
 
-  @Html.LabelFor(model => model.Category)
+  @Html.LabelFor(model => model.Tag)
   @Html.DropDownList("CategoryId")
+
+  //need more fields for whoel model
 
   <input type="submit" value="Save" />
 }

@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
-using ToDoList.Models;
+using RecipeBox.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace ToDoList.Controllers
+namespace RecipeBox.Controllers
 {
   public class TagsController : Controller
   {
-    private readonly ToDoListContext _db;
+    private readonly RecipeBoxContext _db;
 
-    public TagsController(ToDoListContext db)
+    public TagsController(RecipeBoxContext db)
     {
       _db = db;
     }
@@ -25,7 +25,7 @@ namespace ToDoList.Controllers
     {
       Tag thisTag = _db.Tags
           .Include(tag => tag.JoinEntities)
-          .ThenInclude(join => join.Item)
+          .ThenInclude(join => join.Recipe)
           .FirstOrDefault(tag => tag.TagId == id);
       return View(thisTag);
     }
@@ -43,22 +43,22 @@ namespace ToDoList.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult AddItem(int id)
+    public ActionResult AddRecipe(int id)
     {
       Tag thisTag = _db.Tags.FirstOrDefault(tags => tags.TagId == id);
-      ViewBag.ItemId = new SelectList(_db.Items, "ItemId", "Description");
+      ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "Description");
       return View(thisTag);
     }
 
     [HttpPost]
-    public ActionResult AddItem(Tag tag, int itemId)
+    public ActionResult AddRecipe(Tag tag, int recipeId)
     {
       #nullable enable
-      ItemTag? joinEntity = _db.ItemTags.FirstOrDefault(join => (join.ItemId == itemId && join.TagId == tag.TagId));
+      RecipeTag? joinEntity = _db.RecipeTags.FirstOrDefault(join => (join.RecipeId == recipeId && join.TagId == tag.TagId));
       #nullable disable
-      if (joinEntity == null && itemId != 0)
+      if (joinEntity == null && recipeId != 0)
       {
-        _db.ItemTags.Add(new ItemTag() { ItemId = itemId, TagId = tag.TagId });
+        _db.RecipeTags.Add(new RecipeTag() { RecipeId = recipeId, TagId = tag.TagId });
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = tag.TagId });
@@ -96,8 +96,8 @@ namespace ToDoList.Controllers
     [HttpPost]
     public ActionResult DeleteJoin(int joinId)
     {
-      ItemTag joinEntry = _db.ItemTags.FirstOrDefault(entry => entry.ItemTagId == joinId);
-      _db.ItemTags.Remove(joinEntry);
+      RecipeTag joinEntry = _db.RecipeTags.FirstOrDefault(entry => entry.RecipeTagId == joinId);
+      _db.RecipeTags.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using ToDoList.Models;
+using RecipeBox.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ToDoList.Controllers
+namespace RecipeBox.Controllers
 {
-  public class ItemsController : Controller
+  public class RecipesController : Controller
   {
-    private readonly ToDoListContext _db;
+    private readonly RecipeBoxContext _db;
 
-    public ItemsController(ToDoListContext db)
+    public ItemsController(RecipeBoxContext db)
     {
       _db = db;
     }
