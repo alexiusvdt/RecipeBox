@@ -8,19 +8,19 @@
 
 <hr>
 
-<h4>Items</h4>
+<h4>Recipes</h4>
 @if (Model["recipes"].Length == 0)
 {
-  <p>No items have been added yet!</p>
+  <p>No recipess have been added yet!</p>
 } 
 <ul>
   @foreach (Recipe recipe in Model["recipes"])
   {
-    <li>@Html.ActionLink(@item.Description, "Details", "Items", new { id = @item.RecipeId})</li>
+    <li>@Html.ActionLink(@recipe.Name, "Details", "Recipes", new { id = @recipe.RecipeId})</li>
   }
 </ul>
 
 <hr>
 
-<p>@Html.ActionLink("Manage recipes", "Index", "Items")</p> 
+<p>@Html.ActionLink("Manage recipes", "Index", "Recipes")</p> 
 <p>@Html.ActionLink("Manage tags", "Index", "Tags")</p>

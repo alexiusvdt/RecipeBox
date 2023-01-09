@@ -2,24 +2,23 @@
   Layout = "_Layout";
 }
 
-@model Recipebox.Models.Item
+@model RecipeBox.Models.Recipe
 
 <h2>Edit</h2>
 
-<h4>Edit this item: @Html.DisplayFor(model => model.Description)</h4>
+<h4>Edit this item: @Html.DisplayFor(model => model.Name)</h4>
 
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.RecipeId)
 
-  @Html.LabelFor(model => model.Description)
-  @Html.EditorFor(model => model.Description)
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
 
+  @*
   @Html.LabelFor(model => model.Tag)
   @Html.DropDownList("CategoryId")
-
-  //need more fields for whoel model
-
+  *@
   <input type="submit" value="Save" />
 }
 

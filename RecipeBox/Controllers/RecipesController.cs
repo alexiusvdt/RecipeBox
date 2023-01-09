@@ -18,8 +18,8 @@ namespace RecipeBox.Controllers
 
     public ActionResult Index()
     {
-      List<Recipes> model = _db.Recipes
-                            .Include(recipe => recipe.Tags)
+      List<Recipe> model = _db.Recipes
+                            // .Include(recipe => recipe.Tags)
                             .ToList();
       return View(model);
     }
@@ -40,7 +40,7 @@ namespace RecipeBox.Controllers
       }
       else
       {
-        _db.Items.Add(recipe);
+        _db.Recipes.Add(recipe);
         _db.SaveChanges();
         return RedirectToAction("Index");
       }
@@ -48,8 +48,8 @@ namespace RecipeBox.Controllers
 
     public ActionResult Details(int id)
     {
-      Item thisRecipe = _db.Recipes
-          .Include(recipe => recipe.Tag)
+      Recipe thisRecipe = _db.Recipes
+          // .Include(recipe => recipe.Tag)
           .Include(recipe => recipe.JoinEntities)
           .ThenInclude(join => join.Tag)
           .FirstOrDefault(recipe => recipe.RecipeId == id);
@@ -103,7 +103,7 @@ namespace RecipeBox.Controllers
         _db.RecipeTags.Add(new RecipeTag() { TagId = tagId, RecipeId = recipe.RecipeId });
         _db.SaveChanges();
       }
-      return RedirectToAction("Details", new { id = item.RecipeId });
+      return RedirectToAction("Details", new { id = recipe.RecipeId });
     }   
 
     [HttpPost]

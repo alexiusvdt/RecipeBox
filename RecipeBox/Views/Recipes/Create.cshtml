@@ -8,11 +8,11 @@
 
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.Description)
-  @Html.TextBoxFor(model => model.Description)
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
 
   //needs more
 
-  <input type="submit" value="Add new item" class="btn btn-default" />
+  <input type="submit" value="Add new recipe" class="btn btn-default" />
 }
 <p>@Html.ActionLink("Show all items", "Index")</p>
