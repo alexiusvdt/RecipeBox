@@ -4,6 +4,6 @@ namespace RecipeBox.Models
 {
     public class ApplicationUser : IdentityUser
     {
-
+        //sprinkles on a sundae
     }
 }

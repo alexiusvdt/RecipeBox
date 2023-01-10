@@ -2,7 +2,6 @@
 Todo:
    * As a user, I want to add a recipe with ingredients and instructions, so I remember how to prepare my favorite dishes.
    * As a user, I want to rate my recipes, so I know which ones are the best.
- 
    * As a user, I want to list my recipes by highest rated so I can see which ones I like the best.
    * As a user, I want to see all recipes that use a certain ingredient, so I can more easily find recipes for the ingredients I have.
 

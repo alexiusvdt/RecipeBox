@@ -8,18 +8,32 @@
 
 <hr>
 
-<h4>Recipes</h4>
+<h1>Recipes for @User.Identity.Name</h1>
+
 @if (Model["recipes"].Length == 0)
 {
   <p>No recipes have been added yet!</p>
 } 
+
+
+@if (User.Identity.IsAuthenticated)
+{
+  <h4>Recipes for @User.Identity.Name</h4>
+  @if (@Model["recipes"].Length == 0)
+  {
+    <p>No recipes have been added!</p>
+  }
 <ul>
   @foreach (Recipe recipe in Model["recipes"])
   {
     <li>@Html.ActionLink(@recipe.Name, "Details", "Recipes", new { id = @recipe.RecipeId})</li>
   }
 </ul>
-
+}
+else
+{
+  <p>Please @Html.ActionLink("log in", "LogIn", "Account") to view your recipes</p>
+}
 <hr>
 
 <p>@Html.ActionLink("Create or manage an account", "Index", "Account")</p>

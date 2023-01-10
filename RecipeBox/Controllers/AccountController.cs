@@ -74,6 +74,10 @@ namespace RecipeBox.Controllers
         {
           return RedirectToAction("Index");
         }
+        // if (result.IsLockedOut)
+        // {
+        //   ModelState.AddModelError("", "You are locked out. Try again in one minute.")
+        // }
         else
         {
           ModelState.AddModelError("", "There is something wrong with your login info. Please try again.");

@@ -23,9 +23,15 @@ namespace RecipeBox.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-     return View(_db.Recipes.ToList());
+      string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      List<Recipe> userRecipes = _db.Recipes
+                          .Where(entry => entry.User.Id == currentUser.Id)
+                          // .Include(recipe => recipe.Name)
+                          .ToList();
+      return View(userRecipes);
     }
 
     public ActionResult Create()
@@ -35,7 +41,7 @@ namespace RecipeBox.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Recipe recipe)
+    public async Task<ActionResult> Create(Recipe recipe)
     {
       if (!ModelState.IsValid)
       {
@@ -44,6 +50,9 @@ namespace RecipeBox.Controllers
       }
       else
       {
+        string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+        recipe.User = currentUser;
         _db.Recipes.Add(recipe);
         _db.SaveChanges();
         return RedirectToAction("Index");

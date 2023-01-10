@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RecipeBox.Models;
 using Microsoft.AspNetCore.Identity;
+// using System.Data.SqlClient;
+using System.Configuration;
 
 namespace RecipeBox
 {
@@ -13,6 +15,7 @@ namespace RecipeBox
 
       WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+
       builder.Services.AddControllersWithViews();
 
       builder.Services.AddDbContext<RecipeBoxContext>(
@@ -22,10 +25,14 @@ namespace RecipeBox
                           )
                         )
                       );
-      
+    
+
       builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<RecipeBoxContext>()
                 .AddDefaultTokenProviders();
+ 
+
+                
 
       builder.Services.Configure<IdentityOptions>(options =>
       {
@@ -36,7 +43,12 @@ namespace RecipeBox
       options.Password.RequireUppercase = false;
       options.Password.RequiredLength = 0;
       options.Password.RequiredUniqueChars = 0;
+      // options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1);
+      // options.Lockout.MaxFailedAccessAttempts = 5;
+      // options.Lockout.AllowForNewUsers = true;
       });  
+      // this api key is non-functional
+      // var RecipesApiKey = builder.Configuration["Recipes:ServiceApiKey"]
 
       WebApplication app = builder.Build();
 
