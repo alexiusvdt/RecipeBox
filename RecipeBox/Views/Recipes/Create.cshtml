@@ -4,21 +4,20 @@
 
 @model RecipeBox.Models.Recipe
 
-<h4>Add a new item</h4>
+<h4>Add a new Recipe</h4>
 
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
+  @*public string Ingredients { get; set; }*@
+  
+  @Html.LabelFor(model => model.Instructions)
+  @Html.TextBoxFor(model => model.Instructions)
 
-  @*@Html.LabelFor(model => model.Name)
-  @Html.TextBoxFor(model => model.Name)
+  @Html.LabelFor(model => model.Rating)
+  @Html.TextBoxFor(model => model.Rating)
 
-  @Html.LabelFor(model => model.Name)
-  @Html.TextBoxFor(model => model.Name)
-
-  @Html.LabelFor(model => model.Name)
-  @Html.TextBoxFor(model => model.Name) *@
 
   <input type="submit" value="Add new recipe" class="btn btn-default" />
 }

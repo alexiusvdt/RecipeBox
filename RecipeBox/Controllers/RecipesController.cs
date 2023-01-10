@@ -4,24 +4,28 @@ using Microsoft.AspNetCore.Mvc;
 using RecipeBox.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace RecipeBox.Controllers
 {
+  [Authorize]
   public class RecipesController : Controller
   {
     private readonly RecipeBoxContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public RecipesController(RecipeBoxContext db)
+    public RecipesController(UserManager<ApplicationUser> userManager,RecipeBoxContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
     public ActionResult Index()
     {
-      List<Recipe> model = _db.Recipes
-                            // .Include(recipe => recipe.Tags)
-                            .ToList();
-      return View(model);
+     return View(_db.Recipes.ToList());
     }
 
     public ActionResult Create()
